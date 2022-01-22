@@ -1,0 +1,25 @@
+.twp-container {
+  border: 1px solid var(--theme-link-color);
+  align-items: center;
+  border-radius: 3px;
+  background: black;
+  display: inline-flex;
+  padding: 0 4px;
+  margin-left: 4px;
+  line-height: 20px;
+}
+
+.twp-container__trend-indicator {
+  margin-left: 3px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+
+.twp-container__trend-indicator[data-twp-trending="up"] {
+  border-bottom: 5px solid red;
+}
+
+.twp-container__trend-indicator[data-twp-trending="down"] {
+  border-bottom: 5px solid green;
+  transform: rotate(180deg);
+}

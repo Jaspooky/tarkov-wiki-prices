@@ -1,0 +1,21 @@
+{
+  "description": "Displays pricing stats from tarkov-tools API for item links on the Escape From Tarkov wiki.",
+  "manifest_version": 2,
+  "name": "Tarkov Wiki Prices",
+  "version": "1.0.1",
+  "homepage_url": "https://github.com/Jaspooky/tarkov-wiki-prices",
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://escapefromtarkov.fandom.com/*"],
+      "js": ["addon.js"],
+      "css": ["styles.css"]
+    }
+  ],
+
+  "permissions": ["storage", "*://tarkov-tools.com/*"]
+}
