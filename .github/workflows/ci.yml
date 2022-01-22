@@ -16,8 +16,13 @@ jobs:
         run: npm ci
       - name: Build bundle
         run: make
-      - name: Create artifact
+      - name: Create manifest v2 artifact
         uses: actions/upload-artifact@v2
         with:
-          name: addon
-          path: dist
+          name: addon-manifest-v2
+          path: dist/manifest-v2
+      - name: Create manifest v3 artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: addon-manifest-v3
+          path: dist/manifest-v3
