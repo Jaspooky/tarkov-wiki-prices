@@ -1,18 +1,30 @@
 import { hookAnchor } from "./lib/hookAnchor";
 import { fetchItemStats } from "./lib/fetchItemStats";
-import { findNonImageContentAnchors } from "./lib/findNonImageContentAnchors";
+import { findRelevantContentAnchors } from "./lib/findRelevantContentAnchors";
 
 export const main = async () => {
   const itemStats = await fetchItemStats();
 
-  findNonImageContentAnchors(document).forEach((link) => {
+  findRelevantContentAnchors(document).forEach((link) => {
     const item = itemStats[link.href];
 
     if (!item) {
       return;
     }
 
-    hookAnchor(link, item.avg24hPrice, item.changeLast48hPercent);
+    hookAnchor(link, item);
+  });
+
+  // Nice visual effect to have tooltips follow the cursor
+  const tooltips = Array.from(
+    document.querySelectorAll(".twp-container__tooltip")
+  ).filter((node) => node instanceof HTMLDivElement) as HTMLDivElement[];
+
+  window.addEventListener("mousemove", (e) => {
+    tooltips.forEach((tooltip) => {
+      tooltip.style.top = e.clientY + 24 + "px";
+      tooltip.style.left = e.clientX + "px";
+    });
   });
 };
 

@@ -1,25 +1,54 @@
+.twp-wrapper {
+  display: inline-block;
+}
+
 .twp-container {
   border: 1px solid var(--theme-link-color);
   align-items: center;
   border-radius: 3px;
   background: black;
   display: inline-flex;
-  padding: 0 4px;
+  padding: 0 3px;
   margin-left: 4px;
-  line-height: 20px;
+  cursor: pointer;
+  font-size: 0.8rem;
 }
 
-.twp-container__trend-indicator {
+.twp-container__current-price {
+  font-weight: normal;
+  height: 16px;
+  line-height: 16px;
+}
+
+.twp-container__price-trend {
   margin-left: 3px;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
 }
 
-.twp-container__trend-indicator[data-twp-trending="up"] {
+.twp-container__price-trend[data-twp-trending="up"] {
   border-bottom: 5px solid red;
 }
 
-.twp-container__trend-indicator[data-twp-trending="down"] {
+.twp-container__price-trend[data-twp-trending="down"] {
   border-bottom: 5px solid green;
   transform: rotate(180deg);
+}
+
+.twp-container .twp-container__tooltip {
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid var(--theme-link-color);
+  border-radius: 3px;
+  padding: 6px;
+  display: none;
+  transform: translate(-50%, 0);
+  z-index: 10;
+  font-weight: normal;
+  text-align: left;
+}
+
+.twp-container:hover .twp-container__tooltip {
+  display: block !important;
+  position: fixed;
+  overflow: hidden;
 }

@@ -1,4 +1,4 @@
-import { tarkovPriceApiUrl } from "./config";
+import { itemStatsQuery, tarkovPriceApiUrl } from "./config";
 import type { ItemStatsLinkMap } from "./types/ItemStatsLinkMap";
 import type { ItemStats } from "./types/ItemStats";
 
@@ -12,15 +12,7 @@ export const fetchItemStats = async () => {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify({
-      query: `{
-        itemsByType(type: any) {
-          wikiLink,
-          avg24hPrice,
-          changeLast48hPercent
-        }
-      }`,
-    }),
+    body: JSON.stringify({ query: itemStatsQuery }),
   });
 
   if (!statsResponse.ok) {
@@ -33,12 +25,8 @@ export const fetchItemStats = async () => {
     throw new Error(`No item stats: ${statsResponse.statusText}`);
   }
 
-  return data.reduce<ItemStatsLinkMap>((acc, item) => {
-    acc[item.wikiLink] = {
-      avg24hPrice: item.avg24hPrice,
-      changeLast48hPercent: item.changeLast48hPercent,
-    };
-
+  return data.reduce<ItemStatsLinkMap>((acc, { wikiLink, ...rest }) => {
+    acc[wikiLink] = rest;
     return acc;
   }, {});
 };
