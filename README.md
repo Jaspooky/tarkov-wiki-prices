@@ -5,7 +5,7 @@
 
 Tired of having to keep tabbing between Tarkov and the wiki to see the price of items? Or keeping multiple sites open to track how much the Gunsmith quests are going to set you back? Tire no more! The Tarkov Wiki Prices extension adds current flea market rates to the wiki (data courtesy of [tarkov-tools.com](https://tarkov-tools.com/))!
 
-![Trade example](https://i.imgur.com/SZ9DCEI.png)
+![Trade example](https://i.imgur.com/uozfvKV.png)
 
 # Contributing
 
