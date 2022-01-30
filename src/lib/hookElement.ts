@@ -41,16 +41,20 @@ const getTradeRow = (trade: ItemTrade) => {
   `;
 };
 
-/** Attaches addon content to anchor element, such as price and price trend. */
-export const hookAnchor = async (
-  a: HTMLAnchorElement,
+/** Attaches addon content to element, such as price and price trend. */
+export const hookElement = async (
+  element: HTMLElement,
   item: ItemStatsLinkMap[string]
 ) => {
+  if (!item) {
+    return;
+  }
+
   const { avg24hPrice, buyFor, changeLast48hPercent } = item;
 
   // Create a wrapper span to put the original link into
   const linkWrapperSpan = document.createElement("span");
-  linkWrapperSpan.append(a.cloneNode(true));
+  linkWrapperSpan.append(element.cloneNode(true));
 
   // Create a little div to contain information after link without content
   // having the same href.
@@ -99,5 +103,5 @@ export const hookAnchor = async (
     </table>
   `;
 
-  a.replaceWith(linkWrapperSpan);
+  element.replaceWith(linkWrapperSpan);
 };
