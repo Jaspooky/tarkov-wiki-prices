@@ -1,4 +1,4 @@
-import { hookAnchor } from "./lib/hookAnchor";
+import { hookElement } from "./lib/hookElement";
 import { fetchItemStats } from "./lib/fetchItemStats";
 import { findRelevantContentAnchors } from "./lib/findRelevantContentAnchors";
 
@@ -6,13 +6,21 @@ export const main = async () => {
   const itemStats = await fetchItemStats();
 
   findRelevantContentAnchors(document).forEach((link) => {
-    const item = itemStats[link.href];
+    hookElement(link, itemStats[link.href]);
+  });
 
-    if (!item) {
+  const header = document.getElementById("firstHeading");
+
+  if (header) {
+    hookElement(header, itemStats[location.href]);
+  }
+
+  Array.from(document.querySelectorAll(".selflink")).forEach((selfLink) => {
+    if (!(selfLink instanceof HTMLElement)) {
       return;
     }
 
-    hookAnchor(link, item);
+    hookElement(selfLink, itemStats[location.href]);
   });
 
   // Nice visual effect to have tooltips follow the cursor
